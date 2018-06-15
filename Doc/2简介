@@ -1,0 +1,14 @@
+JavaScript MVC框架
+
+npm init初始化
+sudo npm install --save react react-dom babelify babel-preset-react
+sudo npm install babel-present-es2015 --save
+全局安装webpack
+sudo npm install -g webpack
+sudo npm install -g webpack-dev-server
+目录安装
+sudo npm install webpack-dev-server --save
+
+webpack 打包
+webpack-dev-server
+webpack-dev-server --contentbase src --inline ---hot
