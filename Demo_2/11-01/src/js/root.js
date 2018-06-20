@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import {Router,Route,hashHistory} from 'react-router';
 import {Button} from 'antd'
 import PCIndex from './components/pc_index'
+import MediaQuery from 'react-responsive'
+import MobileIndex from './components/mobile_index'
 
 import 'antd/dist/antd.css'
 
@@ -10,7 +12,12 @@ export default class Root extends React.Component{
   render(){
     return (
       <div>
-        <PCIndex/>
+        <MediaQuery query='(min-device-width: 1224px)'>
+          <PCIndex/>
+        </MediaQuery>
+        <MediaQuery query='(max-device-width: 1224px)'>
+          <MobileIndex/>
+        </MediaQuery>
       </div>
     );
   };
