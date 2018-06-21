@@ -12,3 +12,7 @@ sudo npm install webpack-dev-server --save
 webpack 打包
 webpack-dev-server
 webpack-dev-server --contentbase src --inline --hot
+
+npm:
+antd: Ant Design UI
+
