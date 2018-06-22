@@ -10,7 +10,8 @@ import {
 	Button,
 	CheckBox,
 	Modal,
-	Card
+	Card,
+	notification
 } from 'antd';
 const FormItem = Form.Item;
 const SubMenu = Menu.SubMenu;
@@ -19,11 +20,11 @@ const MenuItemGroup = Menu.ItemGroup;
 import {Router, Route, Link, browserHistory} from 'react-router'
 class CommonComments extends React.Component {
 	constructor() {
-        super();
-        this.state = {
-            comments: ''
-        };
-    };
+		super();
+		this.state = {
+			comments: ''
+		};
+	};
 	componentDidMount() {
 		var myFetchOptions = {
 			method: 'GET'
@@ -42,12 +43,21 @@ class CommonComments extends React.Component {
 			this.componentDidMount();
 		})
 	};
+	addUserCollection() {
+		var myFetchOptions = {
+			method: 'GET'
+		};
+		fetch("http://newsapi.gugujiankong.com/Handler.ashx?action=uc&userid=" + localStorage.userid + "&uniquekey=" + this.props.uniquekey, myFetchOptions).then(response => response.json()).then(json => {
+			//收藏成功以后进行一下全局的提醒
+			notification['success']({message: 'ReactNews提醒', description: '收藏此文章成功'});
+		});
+	};
 	render() {
 		let {getFieldProps} = this.props.form;
 		const {comments} = this.state;
 		const commnetList = comments.length
 			? comments.map((comment, index) => (
-				<Card key={index} title={comment.UserName} extra={<a href = "#"> 发布于 {comment.datetime} </a>}>
+				<Card key={index} title={comment.UserName} extra={< a href = "#" > 发布于 {comment.datetime} </a>}>
 					<p>{comment.Comments}</p>
 				</Card>
 			))
@@ -62,11 +72,13 @@ class CommonComments extends React.Component {
 								<Input type="textarea" placeholder="随便写" {...getFieldProps('remark',{initialValue: ''})}/>
 							</FormItem>
 							<Button type="primary" htmlType="submit">提交评论</Button>
+							&nbsp;&nbsp;
+							<Button type="primary" htmlType="button" onClick={this.addUserCollection.bind(this)}>收藏该文章</Button>
 						</Form>
 					</Col>
 				</Row>
 			</div>
 		);
 	};
-}
+ }
 export default CommonComments = Form.create({})(CommonComments);
