@@ -1,11 +1,19 @@
 import React from 'react';
 import {Row,Col} from 'antd';
 import {Router, Route, Link, browserHistory} from 'react-router'
+/**
+ *document this 快速添加文档注释
+ *
+ * @export
+ * @class MobileList
+ * @extends {React.Component}
+ */
 export default class MobileList extends React.Component {
 	constructor() {
 		super();
 		this.state = {
-			news: ''
+			news: '',
+			value: ''
 		};
 	}
 	componentWillMount() {
@@ -15,6 +23,7 @@ export default class MobileList extends React.Component {
 		fetch("http://newsapi.gugujiankong.com/Handler.ashx?action=getnews&type=" + this.props.type + "&count=" + this.props.count, myFetchOptions).then(response => response.json()).then(json => this.setState({news: json}));
 	};
 	render() {
+		console.log("ddddddd");
 		const {news} = this.state;
 		const newsList = news.length
 			? news.map((newsItem, index) => (
