@@ -16,3 +16,5 @@ webpack-dev-server --contentbase src --inline --hot
 npm:
 antd: Ant Design UI
 
+html 转 jsx
+https://magic.reactjs.net/htmltojsx
